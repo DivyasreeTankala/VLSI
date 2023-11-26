@@ -1,0 +1,13 @@
+module PAD_Ring(TDO_t, P_TCK, P_RST, P_TMS, P_TDI, P_TDO, TCK_t, TRST_t, TMS_t, TDI_t);
+  input TDO_t;
+  output TCK_t, TRST_t, TMS_t, TDI_t;
+  inout P_TCK, P_RST, P_TMS, P_TDI, P_TDO;
+  
+  //PBIDIR(OEN,A,PAD,y)
+  PBIDIR p1(0, 1'bz, P_TCK, TCK_t);
+  PBIDIR p2(0, 1'bz, P_RST, TRST_t);
+  PBIDIR p3(0, 1'bz, P_TMS, TMS_t);
+  PBIDIR p4(0, 1'bz, P_TDI, TDI_t);
+  PBIDIR p5(1, TDO_t, P_TDO, 1'bz);
+
+endmodule
