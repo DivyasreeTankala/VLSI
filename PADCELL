@@ -1,0 +1,9 @@
+//Padcell RTL
+module PBIDIR(OEN,A,PAD,y);
+  input OEN,A;
+  inout PAD;
+  output y;
+  
+  assign y = (OEN==0) ? PAD : 1'bz;
+  assign PAD = (OEN==1) ? A : 1'bz;
+endmodule
