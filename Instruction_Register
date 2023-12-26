@@ -1,0 +1,26 @@
+module Instruction_reg(TDI, TCK, capture_ir, shift_ir, update_ir, updatedIR_reg);
+  input TDI, TCK, capture_ir, shift_ir, update_ir;
+  output reg [3:0]updatedIR_reg;
+  //output reg OPCD;
+  
+  reg [3:0]IR_reg;
+  
+  always@(posedge TCK)
+    begin
+      if(capture_ir)
+    begin
+    IR_reg[3] <= TDI;
+    end
+    
+    else if(shift_ir) begin
+    IR_reg <= {TDI,IR_reg[3:1]};
+    updatedIR_reg <= IR_reg;
+    end
+    
+    else if(update_ir) begin
+      updatedIR_reg <= IR_reg;
+      end
+    end
+    
+endmodule
+  
