@@ -14,9 +14,6 @@ module BYPASS(TCK, TRST, TDI, OPCD, capture_dr, shift_dr, update_dr, TDO, update
       if(OPCD) begin
         TDO <= bypass_reg[0];
         end
-       //else begin
-//         TDO <= 1'bz;
-//         end
     end
    end
   
