@@ -1,0 +1,19 @@
+module JTAG_macro(TCK, TDI, TRST, TMS, TDO, nxt_state, IR_reg, OPCD, enable);
+  input TCK, TDI, TRST, TMS;
+  output reg TDO;
+  output reg [3:0]nxt_state;
+  output reg [3:0]IR_reg;
+  output OPCD;
+  output enable;
+  
+  TAP_FSM tap(TMS, TCK, TRST, nxt_state, capture_dr, shift_dr, update_dr, capture_ir, shift_ir, update_ir);
+  
+  Instruction_reg irr(TDI, TCK, capture_ir, shift_ir, update_ir, IR_reg);
+  //Instruction_reg(TDI, TCK, capture_ir, shift_ir, update_ir, updatedIR_reg);
+  
+  instr_decoder idd(IR_reg, OPCD, enable);
+  
+  BYPASS brr(TCK, TRST, TDI, enable, capture_dr, shift_dr, update_dr, TDO, updated_reg);
+  
+endmodule
+
